@@ -2,7 +2,7 @@ from pymongo import MongoClient
 
 class DatabaseController():
     def __init__(self):
-        uri = "mongodb+srv://admin:lSRhwjEoBovtRRVY@darak-mall.auiaj9f.mongodb.net/?retryWrites=true&w=majority",
+        uri = "mongodb+srv://m39-ibrahim:<password>@cluster0.zmiw6ok.mongodb.net/?retryWrites=true&w=majority"
         self.client = MongoClient(uri)
         self.db = self.client.darak_mall
         self.tables = {
