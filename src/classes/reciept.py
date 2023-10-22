@@ -1,4 +1,4 @@
-from payment import Payment
+from classes.payment import Payment
 
 
 class Reciept(object):

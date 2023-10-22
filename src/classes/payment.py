@@ -1,4 +1,4 @@
-from item import Item
+from classes.item import Item
 
 
 class Payment(object):

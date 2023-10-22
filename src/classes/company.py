@@ -1,4 +1,4 @@
-from section import Section
+from classes.section import Section
 
 
 class Company(object):
@@ -41,7 +41,9 @@ class Company(object):
         self.__social_media = value
 
     def add_section(self, name):
+        #code to add a section name here
         ...
 
     def update_section_name(self, id, name):
+        #code to update a section name here
         ...

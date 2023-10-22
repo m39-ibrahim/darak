@@ -2,13 +2,12 @@ from classes import db
 
 
 class User(object):
-    def __init__(self, id, password):
-        self.__id = id
-        self.__name = None
-        self.__email = None
-        self.__phone_number = None
-        self.__address = None
-        self.__password = password
+    def __init__(self, id, name, email, phone_number, address):
+        self.__id = ""
+        self.__name = ""
+        self.__email =""
+        self.__phone_number = ""
+        self.__address = ""
 
     def get_id(self):
         return self.__id
@@ -39,16 +38,3 @@ class User(object):
 
     def set_address(self, value):
         self.__address = value
-
-    def login(self):
-        user_info = db.select(self)
-
-        if user_info == [None]:
-            return False
-
-        self.__name = user_info["name"]
-        self.__email = user_info["email"]
-        self.__phone_number = user_info["phone_number"]
-        self.__address = user_info["address"]
-
-        return self
