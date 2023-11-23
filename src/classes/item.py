@@ -18,7 +18,7 @@ class Section(object):
     def set_name(self, value):
         self.__name = value
         
-        
+
     def get_all_sections(self):
         return db.Select(Section())
 

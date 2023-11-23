@@ -1,6 +1,6 @@
 from classes import db
 
-
+# check if you are going to add password here or not
 class User(object):
     def __init__(self, id, name, email, phone_number, address):
         self.__id = ""
