@@ -1,5 +1,4 @@
-from classes.section import Section
-
+from classes import db
 
 class Company(object):
     def __init__(self):
@@ -40,10 +39,23 @@ class Company(object):
     def set_social_media(self, value):
         self.__social_media = value
 
-    def add_section(self, name):
-        #code to add a section name here
-        ...
+def update_company(self, name, new_name=None, email=None, new_email=None, phone_number=None, new_phone_number=None, address=None, new_address=None, social_media=None, new_social_media=None):
 
-    def update_section_name(self, id, name):
-        #code to update a section name here
-        ...
+        existing_company = db.Select(Company(name))
+        if existing_company:
+            if new_name is not None:
+                existing_company[0]["name"] = new_name
+            if new_email is not None:
+                existing_company[0]["email"] = new_email
+            if new_phone_number is not None:
+                existing_company[0]["phone_number"] = new_phone_number
+            if new_address is not None:
+                existing_company[0]["address"] = new_address
+            if new_social_media is not None:
+                existing_company[0]["social_media"] = new_social_media
+
+            db.Update(Company(name), existing_company[0])
+        else:
+            print("Error: Company not found")
+
+#EXAMPLE USAGE update_company("company_name", new_email="new_email@example.com", new_social_media=["new_twitter", "new_linkedin"])

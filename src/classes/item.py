@@ -1,5 +1,4 @@
 from classes import db
-#ask about the recipt class
 class Section(object):
     def __init__(self, id,name=None, categories=None):
         self.id =""
@@ -111,6 +110,8 @@ class Item(object):
         self.__price = None
         self.__description = None
         self.__quantity = None
+        self.__category = None
+        self.__section = None
 
     def get_id(self):
         return self.__id
@@ -142,13 +143,77 @@ class Item(object):
     def set_quantity(self, value):
         self.__quantity = value
         
-   # def add_item(self, name, price, description, quantity):
-        # self.name = name
-        # self.price = price
-        # self.description = description
-        # self.quantity = quantity
-        # db.Insert(self)
-# you need to choose the category that you are going to add to and also add the rest of item functionalties here
+    def get_category(self):
+        return self.__category
+    
+    def set_category(self, value):
+        self.__category = value
+    
+    def get_section(self):
+        return self.__section
+    
+    def set_section(self, value):
+        self.__section = value
+        
+    def get_all_items(self):
+        return db.Select(Item())
+        
+    def add_item(self, name, price, description, quantity, category, section):
+        if db.select(Item(name)):
+            print("Error: Item already exists")
+        else:
+            self.name = name
+            self.price = price
+            self.description = description
+            self.quantity = quantity
+            self.category = category
+            self.section = section
+            db.Insert(self)
+
+    # def update_item(self, name, new_name, price, new_price, describition, new_describition, quantity, new_quantity, categroy, new_category, section, new_Section):
+        
+    #     existing_item = db.Select(Item(name))
+    #     if existing_item:
+    #         existing_item[0]["name"] = new_name
+    #         existing_item[0]["price"] = new_price
+    #         existing_item[0]["description"] = new_describition
+    #         existing_item[0]["quantity"] = new_quantity
+    #         existing_item[0]["category"] = new_category
+    #         existing_item[0]["section"] = new_Section
+    #         db.Update(Item(name), existing_item[0])
+            
+    #     else:
+    #         print("Error: Item not found")
+
+    def update_item(self, name, new_name=None, new_price=None, new_description=None, new_quantity=None, new_category=None, new_section=None):
+        existing_item = db.Select(Item(name))
+        if existing_item:
+            if new_name is not None:
+                existing_item[0]["name"] = new_name
+            if new_price is not None:
+                existing_item[0]["price"] = new_price
+            if new_description is not None:
+                existing_item[0]["description"] = new_description
+            if new_quantity is not None:
+                existing_item[0]["quantity"] = new_quantity
+            if new_category is not None:
+                existing_item[0]["category"] = new_category
+            if new_section is not None:
+                existing_item[0]["section"] = new_section
+
+            db.Update(Item(name), existing_item[0])
+        else:
+            print("Error: Item not found")
+
+    def delete_item(self, name):
+        # Check if the item exists in the database
+        existing_item = db.Select(Item(name))
+        if existing_item:
+            db.Delete(Item(name))
+        else:
+            print("Error: Item not found")
+   
+
 
 
 class Reciept(object):
@@ -160,6 +225,7 @@ class Reciept(object):
         self.__price_before_discount = None
         self.__discount = None
         self.__payment = None
+        self.__price_after_discount = None
 
     def get_reference(self):
         return self.__reference
@@ -196,3 +262,10 @@ class Reciept(object):
 
     def set_discount(self, value):
         self.__discount = value
+
+    def get_price_after_discount(self):
+        return self.__price_after_discount
+    
+    def set_price_after_discount(self, value):
+        self.__price_after_discount = value
+        
