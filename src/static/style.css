@@ -1,61 +1,163 @@
-/* Reset some default styles */
-body, ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Spartan', sans-serif;
 }
 
-/* Global styles */
+h1 {
+  font-size: 50px;
+  line-height: 64px;
+  color: #222;
+}
+
+h2 {
+  font-size: 46px;
+  line-height: 54px;
+  color: #222;
+}
+
+h4 {
+  font-size: 20px;
+  color: #222;
+}
+
+h6 {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+p {
+  font-size: 16px;
+  margin: 15px 0 20px 0;
+  color: #465b52;
+}
+
+.section-p1 {
+  padding: 40px 80px;
+
+}
+
+.section-m1 {
+  margin: 40px 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
+  width: 100%;
 }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+/* header */
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+  background-color: #e3e6f3;
+  box-shadow: 0 5px 15px rgb(0, 0, 0, 0.06);
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
 }
 
-nav ul {
-    text-align: center;
+
+#navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 20px;
+#navbar li {
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
 }
 
-nav ul li:last-child {
-    margin-right: 0;
+#navbar li a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s ease;
 }
 
-nav a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
+#navbar li a:hover,
+#navbar li a.active {
+  color: #088178;
 }
 
-main {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
+#navbar li a.active::after,
+#navbar li a:hover::after {
+  content: "";
+  width: 30%;
+  height: 2px;
+  background-color: #088178;
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
 }
 
-.featured {
-    background-color: #f4f4f4;
-    padding: 20px;
-    text-align: center;
+/* home page */
+
+#hero {
+  background-image: url('/static/hero.png');
+  height: 90vh;
+  width: 100%; /* Set width to 100% to cover the entire container */
+  background-size: cover; /* Make the background image cover the entire container */
+  background-position: top 25% right 0; /* Center the background image */
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
+#hero h1 {
+  color: #088178;
+}
+
+#hero h4 {
+  padding-bottom: 15px;
+}
+
+#hero button {
+  background-image: url('/static/button.png') ;
+  background-color: transparent;
+  color: 088178;
+  border: 0;
+  padding: 14px 80px 14px 65px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+categories
 .categories {
-    margin-top: 30px;
-    text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-left: 20px; /* Add left padding */
+  padding-top: 20px;
 }
 
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
+.fe-box {
+  display: inline-block;
+  text-align: center;
 }
 
+.fe-box img {
+  width: 300px;
+  height: 200px;
+  display: block; /* To remove extra space below the image */
+  margin: 0 auto; /* Center the image horizontally */
+}
+
+.fe-box h3 {
+  margin-top: 10px; /* Add some space between the image and text */
+}
