@@ -1,77 +1,52 @@
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+# Assuming db is a PyMongo instance or similar
 from classes import db
 
-# check if you are going to add password here or not
-class User(object):
-    def __init__(self, id, name, email, phone_number, address):
-        self.__id = ""
-        self.__name = ""
-        self.__email =""
-        self.__phone_number = ""
-        self.__address = ""
+class User(UserMixin):
+    def __init__(self, name, email, phone_number, address, password=None):
+        self.name = name
+        self.email = email
+        self.phone_number = phone_number
+        self.address = address
+        if password:
+            self.password_hash = generate_password_hash(password)
+        else:
+            self.password_hash = None
 
     def get_id(self):
-        return self.__id
+        return self.email
 
-    def set_id(self, value):
-        self.__id = value
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
-    def get_name(self):
-        return self.__name
-
-    def set_name(self, value):
-        self.__name = value
-
-    def get_email(self):
-        return self.__email
-
-    def set_email(self, value):
-        self.__email = value
-
-    def get_phone_number(self):
-        return self.__phone_number
-
-    def set_phone_number(self, value):
-        self.__phone_number = value
-
-    def get_address(self):
-        return self.__address
-
-    def set_address(self, value):
-        self.__address = value
-
-
-    def add_user(self, id, name, email, phone_number, address):
-        if db.select(User(id)):
-            print("Error: Item already exists")
+    def add_user(user_id, name, email, phone_number, address, password):
+        if db.users.find_one({"email": email}):
+            print("Error: User already exists")
         else:
-            self.name = name
-            self.__email = email
-            self.phone_number = phone_number
-            self.address = address
-            db.Insert(self)
+            user = User( name, email, phone_number, address, password)
+            db.users.insert_one({
+                "name": name,
+                "email": email,
+                "phone_number": phone_number,
+                "address": address,
+                "password": user.password_hash
+            })
 
-    def delete_user(self, id):
-        existing_user = db.Select(User(id))
-        if existing_user:
-            db.Delete(User(id))
-        else:
-            print("Error: Item not found")
-   
+    def delete_user(email):
+        result = db.users.delete_one({"email": email})
+        if result.deleted_count == 0:
+            print("Error: User not found")
 
-        db.delete_user(self.get_id())
+    def update_user(email, new_name=None, new_phone_number=None, new_address=None):
+        updates = {}
+        if new_name:
+            updates['name'] = new_name
+        if new_phone_number:
+            updates['phone_number'] = new_phone_number
+        if new_address:
+            updates['address'] = new_address
 
-def update_user(self, id, new_name=None, new_email=None, new_phone_number=None, new_address=None):
-    existing_user = db.Select(User(id))
-    if existing_user:
-        if new_name is not None:
-            existing_user[0]["name"] = new_name
-        if new_email is not None:
-            existing_user[0]["email"] = new_email
-        if new_phone_number is not None:
-            existing_user[0]["phone_number"] = new_phone_number
-        if new_address is not None:
-            existing_user[0]["address"] = new_address
-
-        db.update_user(existing_user[0])
-    else:
-        print("Error: User not found")
+        result = db.users.update_one({"email": email}, {"$set": updates})
+        if result.matched_count == 0:
+            print("Error: User not found")

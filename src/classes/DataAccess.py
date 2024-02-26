@@ -2,9 +2,9 @@ from pymongo import MongoClient
 
 class DatabaseController():
     def __init__(self):
-        uri = "mongodb+srv://m39-ibrahim:<password>@cluster0.zmiw6ok.mongodb.net/?retryWrites=true&w=majority"
+        uri = "mongodb+srv://m39-ibrahim:Engmahdy2003@cluster0.zmiw6ok.mongodb.net/"
         self.client = MongoClient(uri)
-        self.db = self.client.darak_mall
+        self.db = self.client.darak
         self.tables = {
         # "<class 'classes.Structures.City'>":self.db.Cities,
         # "<class '__main__.Listing'>":self.db.Listings,
