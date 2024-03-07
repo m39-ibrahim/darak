@@ -6,23 +6,20 @@ class DatabaseController():
         self.client = MongoClient(uri)
         self.db = self.client.darak
         self.tables = {
-        # "<class 'classes.Structures.City'>":self.db.Cities,
-        # "<class '__main__.Listing'>":self.db.Listings,
+        "User":self.db.user,
         }
 
     def Insert(self, element):
-        table = self.tables[str(type(element))]
-        self.cursor = table.insert_one(element.__dict__)
+        table = self.tables[element.__class__.__name__]
+        table.insert_one(element.__dict__)
 
-    def Select(self, element):
-        table = self.tables[str(type(element))]
-        cursor=list(table.find(element.__dict__))
-        if len(cursor) == 0:
-            self.cursor = [None]
-        else:
-            self.cursor = cursor
+    def Select(self, query):
+        # Directly assume query is a dictionary for simplicity
+        table = self.tables['User']  # Direct reference to the User collection
+        cursor = list(table.find(query))
+        print(cursor)
+        return cursor
 
-        return self.cursor
 
     def Update(self,element,newElement):
         table = self.tables[str(type(element))]

@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
-from flask_login import login_user, logout_user, login_required, current_user
+from flask import render_template, redirect, url_for, request, flash
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from classes.DataAccess import DatabaseController
 from classes.user import User
@@ -9,20 +9,27 @@ from main import app
 db_controller = DatabaseController()
 
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        # Adjust the query to match your user document structure
-        user_doc = db_controller.Select({"email": email})[0]  # Assuming Select returns a list
-        if user_doc and check_password_hash(user_doc['password'], password):
-            user_obj = User(user_doc['_id'], user_doc['name'], user_doc['email'], user_doc['phone_number'], user_doc['address'])
-            login_user(user_obj, remember=True)
-            return redirect(url_for('index'))
+        
+        # Adjust the Select method to directly use email for the query
+        user_doc = db_controller.Select({"email": email})  # Ensure Select can handle a dict query
+        
+        if user_doc and check_password_hash(user_doc[0]['password_hash'], password):
+            # Assuming user_doc[0] contains the user information
+            user = User(user_doc[0])  # Create a User object with the document
+            login_user(user, remember=True)
+            return redirect(url_for('home'))  # Redirect to the home page
         else:
             flash('Invalid email or password.')
+            return redirect(url_for('login'))  # Stay on the login page if error
+
     return render_template('login.html')
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -39,9 +46,9 @@ def signup():
             return redirect(url_for('account.signup'))
         hashed_password = generate_password_hash(password, method='sha256')
         # Assuming you have a way to convert your user object to a dictionary for MongoDB
-        new_user = {"name": name, "email": email, "password": hashed_password, "phone_number": phone_number,"address": address}
-        db_controller.Insert(new_user)
-        return redirect(url_for('account.login')) # Redirect to login after signup
+        u =User(name, email, phone_number, address, hashed_password)
+        u.add_user()
+        return redirect(url_for('login')) # Redirect to login after signup
     return render_template('login.html')
 
 @app.route('/logout')

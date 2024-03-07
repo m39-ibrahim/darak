@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from classes import db
 
 class User(UserMixin):
-    def __init__(self, name, email, phone_number, address, password=None):
+    def __init__(self, name, email, phone_number, address, password):
         self.name = name
         self.email = email
         self.phone_number = phone_number
@@ -20,18 +20,11 @@ class User(UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def add_user(user_id, name, email, phone_number, address, password):
-        if db.users.find_one({"email": email}):
+    def add_user(self):
+        if db.Select(self):
             print("Error: User already exists")
         else:
-            user = User( name, email, phone_number, address, password)
-            db.users.insert_one({
-                "name": name,
-                "email": email,
-                "phone_number": phone_number,
-                "address": address,
-                "password": user.password_hash
-            })
+            db.Insert(self)
 
     def delete_user(email):
         result = db.users.delete_one({"email": email})

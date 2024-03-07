@@ -13,159 +13,44 @@
   </head>
 
   <body>
-    <section id="header">
-      <a href="#"><img src="{{ header.logo }}" class="logo" alt="" width="100" height="100"/></a>
-      <div>
-        <ul id="navbar">
-          <li><a href="#">{{ header.header_1 }}</a></li>
-          <li><a href="#">{{ header.header_2 }}</a></li>
-          <li><a href="#">{{ header.header_3 }}</a></li>
-          <li><a href="#">{{ header.header_4 }}</a></li>
-          <li><a href="#">{{ header.header_5 }}</a></li>
-          <li><a href="#"><i class="{{header.header_6}}"></i>
-          <li><a href="#">{{ header.header_7 }}</a></li>
-              </a>
-          </li>
-      </ul>
-      </div>
+    <section id="small-header">
       <div class="container">
-        <div>
-    
-            <a href="/login" class="log">Login</a>
-        </div>
-    </div>
-    
-  </section>
-  
-    
-   <!--  <section id="sidebar">
-      <nav class="sidebar">
-        <a href="#" class="logo">CodingLab</a>
-        <div class="menu-content">
-          <ul class="menu-items">
-            <div class="menu-title">Your menu title</div>
-            <li class="item">
-              <a href="#">Your first link</a>
-            </li>
-            <li class="item">
-              <div class="submenu-item">
-                <span>First submenu</span>
-                <i class="fa-solid fa-chevron-right"></i>
-              </div>
-              <ul class="menu-items submenu">
-                <div class="menu-title">
-                  <i class="fa-solid fa-chevron-left"></i>
-                  Your submenu title
-                </div>
-                <li class="item">
-                  <a href="#">First sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">First sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">First sublink</a>
-                </li>
-              </ul>
-            </li>
-            <li class="item">
-              <div class="submenu-item">
-                <span>Second submenu</span>
-                <i class="fa-solid fa-chevron-right"></i>
-              </div>
-              <ul class="menu-items submenu">
-                <div class="menu-title">
-                  <i class="fa-solid fa-chevron-left"></i>
-                  Your submenu title
-                </div>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-                <li class="item">
-                  <a href="#">Second sublink</a>
-                </li>
-              </ul>
-            </li>
-            <li class="item">
-              <a href="#">Your second link</a>
-            </li>
-            <li class="item">
-              <a href="#">Your third link</a>
-            </li>
+          <ul id="small-navbar">
+              <li><a href="#">{{ small_header.sheader1 }}</a></li>
+              <li><a href="#">{{ small_header.sheader2 }}</a></li>
+              <li><a href="#">{{ small_header.sheader3 }}</a></li>
+              <li><a href="/login"><i class="{{small_header.sheader4}}" style="font-size: 16px;"></i></a></li>
           </ul>
-        </div>
-      </nav>
-      <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
-      </nav>
-    </section> -->
+      </div>
+  </section>
 
+  <section id="header">
+    <a href="#"><img src="{{ header.logo }}" class="logo" alt="" width="100" height="100"/></a>
+        <ul id="navbar">
+          <li><a href="javascript:void(0);" id="search-icon"><i class="fas fa-search"></i></a></li>
+            <li><a href="#"><i class="{{header.header_2}}"></i> </a></li>
+            <li><a href="#"><i class="{{header.header_1}}"></i></a></li>
+    </ul>
+    <!-- Search Box to be displayed over the header -->
+    <div id="search-box" class="search-box">
+        <i class="{{header.header_3}}" id="search-magnifier"></i>
+        <input type="text" placeholder="Search for a product" id="search-input">
+        <i class="{{header.header_4}}" id="close-search"></i> <!-- You can replace this with a FontAwesome icon if preferred -->
+    </div>
+</section>
+
+  
     <section id="hero">
-      <h4>Offers</h4>
-      <h2>50% OFF</h2>
-      <h1>on all products</h1>
-      <p>save more with vouchers up to 70% off!%</p>
-      <button>Shop Now</button>
+      <div class="hero-slider">
+        <img src="{{ hero.hero1}}" alt="Hero 1" class="hero-img active">
+        <img src="{{ hero.hero2}}" alt="Hero 2" class="hero-img">
+   
+      </div>
+      <button class="arrow left-arrow" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="arrow right-arrow" onclick="moveSlide(1)">&#10095;</button>
+      <div class="dot-container"></div> <!-- Container for the dots -->
     </section>
-
-
+  
     <section id="feature" class="section-p1">
       <div class="fe-box">
         <img
@@ -461,10 +346,8 @@
         <p>© 2023 Darak Group. All rights reserved.</p>
       </div>
     </footer>
-    
-    <script src="script.js"></script>
-
-
+  
+  <script src="static/script.js"></script>
     
 </body>
 </html>
