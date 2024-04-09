@@ -192,8 +192,7 @@ body {
   left: 50%; /* Center the title horizontally */
   transform: translateX(-50%); /* Center the title horizontally */
   z-index: 1001; /* Ensure it's above other elements */
-  font-size: 35px;
-  font-weight: 900;
+  font-size: 20px;
 }
 
 .category-link {
