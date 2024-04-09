@@ -95,6 +95,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const category = this.getAttribute('data-category');
             const categoryArray = category.split(', '); // Split category string into array
             categoryContainer.innerHTML = ''; // Clear previous content
+            // Create and append the title element
+            const titleElement = document.createElement('h2');
+            titleElement.textContent = 'Categories';
+            titleElement.classList.add('category-title');
+            categoryContainer.insertBefore(titleElement, categoryContainer.firstChild);
+            categoryContainer.style.paddingTop = '70px';
             categoryArray.forEach(function(cat) {
                 const categoryElement = document.createElement('a');
                 const d = document.createElement('div');

@@ -45,15 +45,7 @@
     
   </section>
   
-  <div class="category-container" id="category-container">
-    <ul>
-        {% for section in sections %}
-            {% for category in section.categories %}
-                <li><a href="/categories/{{ category }}">{{ category }}</a></li>
-            {% endfor %}
-        {% endfor %}
-    </ul>
-</div>
+  <div class="category-container" id="category-container"></div>
 
 
     <section id="hero">
