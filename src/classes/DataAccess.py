@@ -7,6 +7,7 @@ class DatabaseController():
         self.db = self.client.darak
         self.tables = {
         "User":self.db.user,
+        "Section":self.db.section,
         }
 
     def Insert(self, element):
@@ -28,3 +29,11 @@ class DatabaseController():
     def Delete(self,element):
         table = self.tables[str(type(element))]
         self.cursor = table.delete_many(element.__dict__)
+        
+    def get_categories(self):
+        section_table = self.tables['Section']
+        categories = []
+        sections = section_table.find({}, {'categories': 1})
+        for section in sections:
+            categories.extend(section['categories'])
+        return categories

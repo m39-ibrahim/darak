@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,20 +27,35 @@
 
   <section id="header">
     <a href="#"><img src="{{ header.logo }}" class="logo" alt="" width="100" height="100"/></a>
-        <ul id="navbar">
-          <li><a href="javascript:void(0);" id="search-icon"><i class="fas fa-search"></i></a></li>
-            <li><a href="#"><i class="{{header.header_2}}"></i> </a></li>
-            <li><a href="#"><i class="{{header.header_1}}"></i></a></li>
+    {% for section in sections %}
+    <a href="{{ (section.name|lower()).replace(' ', '_') }}.html" class="section-link" data-category="{{ section.categories|join(', ') }}">{{ section.name }}</a>
+    {% endfor %}
+  
+    <ul id="navbar">
+      <li><a href="javascript:void(0);" id="search-icon"><i class="fas fa-search"></i></a></li>
+      <li><a href="#"><i class="{{header.header_2}}"></i> </a></li>
+      <li><a href="#"><i class="{{header.header_1}}"></i></a></li>
     </ul>
     <!-- Search Box to be displayed over the header -->
     <div id="search-box" class="search-box">
-        <i class="{{header.header_3}}" id="search-magnifier"></i>
-        <input type="text" placeholder="Search for a product" id="search-input">
-        <i class="{{header.header_4}}" id="close-search"></i> <!-- You can replace this with a FontAwesome icon if preferred -->
+      <i class="{{header.header_3}}" id="search-magnifier"></i>
+      <input type="text" placeholder="Search for a product" id="search-input">
+      <i class="{{header.header_4}}" id="close-search"></i> <!-- You can replace this with a FontAwesome icon if preferred -->
     </div>
-</section>
-
+    
+  </section>
   
+  <div class="category-container" id="category-container">
+    <ul>
+        {% for section in sections %}
+            {% for category in section.categories %}
+                <li><a href="/categories/{{ category }}">{{ category }}</a></li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+
     <section id="hero">
       <div class="hero-slider">
         <img src="{{ hero.hero1}}" alt="Hero 1" class="hero-img active">
@@ -51,51 +67,51 @@
       <div class="dot-container"></div> <!-- Container for the dots -->
     </section>
   
-    <section id="feature" class="section-p1">
-      <div class="fe-box">
-        <img
-          src="/static/features/f1.png"
-          alt=""
-        />
-        <h6>Free shipping</h6>
-      </div>
+  <!-- <section id="feature" class="section-p1">
+    <div class="fe-box">
+      <img
+        src="/static/features/f1.png"
+        alt=""
+      />
+      <h6>Free shipping</h6>
+    </div>
 
-      <div class="fe-box">
-        <img
-          src="/static/features/f2.png"
-          alt=""
-        />
-        <h6>Online order </h6>
-      </div>
-      <div class="fe-box">
-        <img
-          src="/static/features/f3.png"
-          alt=""
-        />
-        <h6>Save Money</h6>
-      </div>
-      <div class="fe-box">
-        <img
-          src="/static/features/f4.png"
-          alt=""
-        />
-        <h6>Promotions</h6>
-      </div>
-      <div class="fe-box">
-        <img
-          src="/static/features/f5.png"
-          alt=""
-        />
-        <h6>Happy Sell</h6>
-      </div>
-      <div class="fe-box">
-        <img
-          src="/static/features/f6.png"
-          alt=""
-        />
-        <h6>24h Support</h6>
-      </div>
-    </section>
+    <div class="fe-box">
+      <img
+        src="/static/features/f2.png"
+        alt=""
+      />
+      <h6>Online order </h6>
+    </div>
+    <div class="fe-box">
+      <img
+        src="/static/features/f3.png"
+        alt=""
+      />
+      <h6>Save Money</h6>
+    </div>
+    <div class="fe-box">
+      <img
+        src="/static/features/f4.png"
+        alt=""
+      />
+      <h6>Promotions</h6>
+    </div>
+    <div class="fe-box">
+      <img
+        src="/static/features/f5.png"
+        alt=""
+      />
+      <h6>Happy Sell</h6>
+    </div>
+    <div class="fe-box">
+      <img
+        src="/static/features/f6.png"
+        alt=""
+      />
+      <h6>24h Support</h6>
+    </div>
+  </section> -->
 
     <section id="product1" class="section-p1">
       <h2>Featured Products</h2>

@@ -70,3 +70,54 @@ document.getElementById('close-search').addEventListener('click', function() {
     document.getElementById('search-box').classList.remove('visible');
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sectionLinks = document.querySelectorAll('.section-link');
+    const categoryContainer = document.getElementById('category-container');
+
+    // Add mouseover event listener to the category container
+    categoryContainer.addEventListener('mouseover', function() {
+        // Keep the container open when the mouse is inside
+        categoryContainer.style.display = 'block';
+    });
+
+    // Add mouseout event listener to the category container
+    categoryContainer.addEventListener('mouseout', function(event) {
+        // Check if the mouse is leaving the container
+        if (!categoryContainer.contains(event.relatedTarget)) {
+            // Close the container only if the mouse is not entering a child element
+            categoryContainer.style.display = 'none';
+        }
+    });
+
+    sectionLinks.forEach(function(sectionLink) {
+        sectionLink.addEventListener('mouseover', function() {
+            const category = this.getAttribute('data-category');
+            const categoryArray = category.split(', '); // Split category string into array
+            categoryContainer.innerHTML = ''; // Clear previous content
+            categoryArray.forEach(function(cat) {
+                const categoryElement = document.createElement('a');
+                const d = document.createElement('div');
+                d.classList.add('category-link');
+                categoryElement.classList.add('category-link');
+                categoryElement.href = '/categories';
+                var linkText = document.createTextNode(cat);
+                categoryElement.appendChild(linkText);
+                d.appendChild(categoryElement);
+                categoryContainer.appendChild(d);
+            });
+            categoryContainer.style.display = 'block';
+        });
+    });
+});
+
+
+
+$(document).ready(function() {
+    $('.category-link').click(function(event) {
+        event.preventDefault();  // Prevent the default behavior of the link
+        var category = $(this).data('category');
+        // Perform your desired action with the category data, such as displaying content dynamically
+        console.log('Category clicked:', category);
+    });
+});

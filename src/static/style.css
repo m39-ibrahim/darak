@@ -69,6 +69,7 @@ body {
   top: 0; /* Stick to the top */
   z-index: 1000; /* Ensure it stays above other content */
 }
+
 #small-navbar {
   display: flex;
   justify-content: flex-end; /* Align items to the right */
@@ -117,16 +118,62 @@ body {
 
 #header {
   display: flex;
+  height: 100px;
   justify-content: space-between;
   align-items: center;
   padding: 5px 80px;
   background-color: #000000;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
-  z-index: 999;
+  z-index: 1001;
   position: sticky;
-  top: 0;
+  position: -webkit-sticky;
+  top: 39px;
   left: 0;
 }
+
+.section-link {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: color 0.3s ease;
+  margin-right: 20px; /* Add margin between section links */
+}
+
+.section-link:hover {
+  color: #088178;
+}
+
+#category-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 139px; /* Height of the header */
+  z-index: 1000; /* Ensure it's above the content */ /* Add back the white background */
+  width: 100%; /* Ensure it takes full width */
+  transition: 0.3 ease; /* Add a smooth transition */
+  column-count: 3;
+  backdrop-filter: blur(10px); /* Apply a blur effect */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.category-link {
+  text-decoration: none;
+  color: #FAF9F6;
+  font-size: 16px;
+  padding: 7px 20px; /* Padding for list elements */
+  margin: 5px 0 ; /* Add margin between list elements */
+  text-align: center;
+  text-transform: capitalize; 
+  font-weight: 450;
+}
+
+.category-link:hover {
+  font-weight: bold;
+  color: #088178;
+}
+
 
 
 #navbar{
@@ -333,8 +380,8 @@ button:hover {
 
 
 
-
-/* feature section */
+/* 
+/* feature section
 #feature{
   display: flex;
   justify-content: space-between;
@@ -389,7 +436,7 @@ button:hover {
 
 #feature .fe-box:nth-child(6) h6{
   background-color: #fff2e5;
-}
+} */
 
 
 /* featured products section */
