@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize slides and dots
     function initSlider() {
         slides[slideIndex].style.display = "block"; // Show the first slide
+            // Clear any existing dots
+        dotContainer.innerHTML = "";
         // Create dots
         slides.forEach((_, index) => {
             const dot = document.createElement("span");

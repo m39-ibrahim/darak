@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+    <link rel="stylesheet" href="static/style.css" />
+    <title>Darak Group</title>
+  </head>
+
+  <body>
+    <section id="small-header">
+      <div class="container">
+          <ul id="small-navbar">
+              <li><a href="home">{{ small_header.sheader1 }}</a></li>
+              <li><a href="about_us">{{ small_header.sheader2 }}</a></li>
+              <li><a href="#">{{ small_header.sheader3 }}</a></li>
+              <li><a href="/login"><i class="{{small_header.sheader4}}" style="font-size: 16px;"></i></a></li>
+          </ul>
+      </div>
+  </section>
+
+  <section id="header">
+    <a href="home"><img src="{{ header.logo }}" class="logo" alt="" width="100" height="100"/></a>
+    {% for section in sections %}
+    <a href="{{ (section.name|lower()).replace(' ', '_') }}.html" class="section-link" data-category="{{ section.categories|join(', ') }}">{{ section.name }}</a>
+    {% endfor %}
+  
+    <ul id="navbar">
+      <li><a href="javascript:void(0);" id="search-icon"><i class="fas fa-search"></i></a></li>
+      <li><a href="#"><i class="{{header.header_2}}"></i> </a></li>
+      <li><a href="#"><i class="{{header.header_1}}"></i></a></li>
+    </ul>
+    <!-- Search Box to be displayed over the header -->
+    <div id="search-box" class="search-box">
+      <i class="{{header.header_3}}" id="search-magnifier"></i>
+      <input type="text" placeholder="Search for a product" id="search-input">
+      <i class="{{header.header_4}}" id="close-search"></i> <!-- You can replace this with a FontAwesome icon if preferred -->
+    </div>
+    
+  </section>
+  
+  <div class="category-container" id="category-container"></div>
+  <script src="static/script.js"></script>
+    
