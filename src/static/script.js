@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function initSlider() {
         slides[slideIndex].style.display = "block"; // Show the first slide
             // Clear any existing dots
-        dotContainer.innerHTML = "";
+         dotContainer.innerHTML = "";
         // Create dots
         slides.forEach((_, index) => {
             const dot = document.createElement("span");
@@ -85,12 +85,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add mouseout event listener to the category container
     categoryContainer.addEventListener('mouseout', function(event) {
+        // const clickedCategory = event.target.textContent.trim();
+        // console.log('Category clicked:', clickedCategory);
+        // // Send the selected category to the server
+        // sendCategoryToServer(clickedCategory);
         // Check if the mouse is leaving the container
         if (!categoryContainer.contains(event.relatedTarget)) {
             // Close the container only if the mouse is not entering a child element
             categoryContainer.style.display = 'none';
         }
     });
+
+    categoryContainer.addEventListener('click', function(event) {
+        const clickedCategory = event.target.textContent.trim();
+        console.log('Category clicked:', clickedCategory);
+        // Send the selected category to the server
+        sendCategoryToServer(clickedCategory);
+    });
+
+    
+    function sendCategoryToServer(category) {
+        // Create an XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
+        // Define the request method, URL, and asynchronous flag
+        xhr.open('POST', '/categories', true);
+        // Set the request header
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        // Define the callback function when the request is complete
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log('Category sent to server successfully.');
+            } else {
+                console.error('Error sending category to server.');
+            }
+        };
+        // Create a JSON object with the selected category
+        const data = JSON.stringify({ category: category });
+        // Send the request with the JSON data
+        xhr.send(data);
+    }
 
     sectionLinks.forEach(function(sectionLink) {
         sectionLink.addEventListener('mouseover', function() {

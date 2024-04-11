@@ -4,9 +4,16 @@
 <body>    
     <h1>Categories</h1>
     <ul>
-        {% for category in categories %}
-            <li>{{ category }}</li>
-        {% endfor %}
-    </ul>
+<!-- Display selected category -->
+{% if selected_category %}
+    <h1>Selected Category: {{ selected_category }}</h1>
+{% endif %}
+
+<!-- Display categories -->
+{% for category in categories %}
+    <p>{{ category.name }}</p>
+    <!-- Add other category details if needed -->
+{% endfor %}
+
 </body>
 </html>
