@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initialize slides and dots
     function initSlider() {
+        try {
         slides[slideIndex].style.display = "block"; // Show the first slide
             // Clear any existing dots
          dotContainer.innerHTML = "";
@@ -41,6 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
             dotContainer.appendChild(dot);
         });
         updateSlides(); // Update slides for the first time
+    }
+    catch(err) {
+        console.log(err.message);
+    }
     }
 
     // Move slide forward or backward
@@ -142,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const d = document.createElement('div');
                 d.classList.add('category-link');
                 categoryElement.classList.add('category-link');
-                categoryElement.href = '/categories';
+                categoryElement.href = '/categories/'+cat;
                 var linkText = document.createTextNode(cat);
                 categoryElement.appendChild(linkText);
                 d.appendChild(categoryElement);

@@ -6,11 +6,11 @@ from flask import request, jsonify
 db_controller = DatabaseController()
 # Function to fetch necessary data
 def fetch_data():
-    small_header_data = db_controller.db.small_header.find_one()
+    small_header = db_controller.db.small_header.find_one()
     header_data = db_controller.db.header.find_one()
     hero_data = db_controller.db.hero.find_one()
     sections_data = db_controller.db.section.find({}, {"name": 1, "categories": 1, "_id": 0})
-    return small_header_data, header_data, hero_data, sections_data
+    return small_header, header_data, hero_data, sections_data
 
 # Home route
 @app.route("/home")

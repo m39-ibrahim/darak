@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
     />
-    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="/static/style.css" />
     <title>Darak Group</title>
   </head>
 
@@ -17,8 +17,8 @@
     <section id="small-header">
       <div class="container">
           <ul id="small-navbar">
-              <li><a href="home">{{ small_header.sheader1 }}</a></li>
-              <li><a href="about_us">{{ small_header.sheader2 }}</a></li>
+              <li><a href="/home">{{ small_header.sheader1 }}</a></li>
+              <li><a href="/about_us">{{ small_header.sheader2 }}</a></li>
               <li><a href="#">{{ small_header.sheader3 }}</a></li>
               <li><a href="/login"><i class="{{small_header.sheader4}}" style="font-size: 16px;"></i></a></li>
           </ul>
@@ -26,9 +26,9 @@
   </section>
 
   <section id="header">
-    <a href="home"><img src="{{ header.logo }}" class="logo" alt="" width="100" height="100"/></a>
+    <a href="/home"><img src="{{ header.logo }}" class="logo" alt="" width="100" height="100"/></a>
     {% for section in sections %}
-    <a href="{{ (section.name|lower()).replace(' ', '_') }}.html" class="section-link" data-category="{{ section.categories|join(', ') }}">{{ section.name }}</a>
+    <a href="/{{ (section.name|lower()).replace(' ', '_') }}.html" class="section-link" data-category="{{ section.categories|join(', ') }}">{{ section.name }}</a>
     {% endfor %}
   
     <ul id="navbar">
@@ -44,7 +44,8 @@
     </div>
     
   </section>
-  
+  {% block stuff %}{% endblock %}
   <div class="category-container" id="category-container"></div>
-  <script src="static/script.js"></script>
-    
+  <script src="/static/script.js"></script>
+  </body> 
+</html> 
