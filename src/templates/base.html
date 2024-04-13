@@ -28,9 +28,8 @@
   <section id="header">
     <a href="/home"><img src="{{ header.logo }}" class="logo" alt="" width="100" height="100"/></a>
     {% for section in sections %}
-    <a href="/{{ (section.name|lower()).replace(' ', '_') }}.html" class="section-link" data-category="{{ section.categories|join(', ') }}">{{ section.name }}</a>
+    <a href="/sections/{{ (section.name|lower()).replace(' ', '_') }}" class="section-link" data-category="{{ section.categories|join(', ') }}">{{ section.name }}</a>
     {% endfor %}
-  
     <ul id="navbar">
       <li><a href="javascript:void(0);" id="search-icon"><i class="fas fa-search"></i></a></li>
       <li><a href="#"><i class="{{header.header_2}}"></i> </a></li>

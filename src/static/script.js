@@ -65,9 +65,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.getElementById('search-icon').addEventListener('click', function() {
+    console.log("Search icon clicked")
     var searchBox = document.getElementById('search-box');
     if (searchBox.classList.contains('visible')) {
-        searchBox.classList.remove('visible');
+        // searchBox.classList.remove('visible');
     } else {
         searchBox.classList.add('visible');
     }
@@ -167,4 +168,39 @@ $(document).ready(function() {
         // Perform your desired action with the category data, such as displaying content dynamically
         console.log('Category clicked:', category);
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // const sectionLinks = document.querySelectorAll('.section-link');
+
+    // sectionLinks.forEach(function(sectionLink) {
+    //     sectionLink.addEventListener('click', function(event) {
+    //         event.preventDefault();  // Prevent the default behavior of the link
+    //         const sectionName = this.textContent.trim();
+    //         // Perform your desired action with the section data
+    //         console.log('Section clicked:', sectionName);
+    //         // Send the selected section to the server
+    //         sendSectionToServer(sectionName);
+    //         // window.location.href = '/sections/' + sectionName.replace(/\s+/g, '_').toLowerCase();
+    //     });
+    // });
+
+    function sendSectionToServer(sectionName) {
+        // Create an XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
+        // Define the request method, URL, and asynchronous flag
+        xhr.open('POST', '/sections/' + sectionName, true);
+        // Set the request header
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        // Define the callback function when the request is complete
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log('Section sent to server successfully.');
+            } else {
+                console.error('Error sending section to server.');
+            }
+        };
+        // Send the request
+        xhr.send();
+    }
 });
