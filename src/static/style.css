@@ -113,6 +113,38 @@ body {
   bottom: -4px;
   left: 20px;
 }
+.logout-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white; /* Set text color to white */
+  font-size: inherit; /* Inherit font size from parent */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  display: inline-block; /* Ensure button is inline with list items */
+  width: 50%;
+  position: relative; /* Add position relative */
+}
+
+.logout-button:hover {
+  width: 0%;
+}
+
+.logout-button:hover i {
+
+  color:#088178
+}
+.logout-button:hover::after {
+  content: "";
+  width: 30%;
+  height: 2px;
+  background-color: #088178;
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
+}
+
+
 
 /* header */
 
@@ -716,6 +748,7 @@ footer a:hover{
   margin: 10px 0; /* Uniform margin for top and bottom */
   padding: 10px; /* Consistent padding */
   box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+  transition: 0.3s ease; /* Smooth transition */
 }
 
 
@@ -727,4 +760,7 @@ footer a:hover{
   background-color: #088178;
   color: white;
   cursor: pointer;
+}
+.form-content.active {
+  opacity: 1; /* Set opacity to 1 when form is active */
 }

@@ -9,19 +9,20 @@ class User(UserMixin):
         self.email = email
         self.phone_number = phone_number
         self.address = address
-        if password:
-            self.password_hash = generate_password_hash(password)
-        else:
-            self.password_hash = None
+        # if password:
+        #     self.password_hash = generate_password_hash(password)
+        # else:
+        #     self.password_hash = None
+        self.password_hash = password
 
     def get_id(self):
         return self.email
 
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    # def check_password(self, password):
+    #     return check_password_hash(self.password_hash, password)
 
     def add_user(self):
-        if db.Select(self):
+        if db.Select({"email": self.email}):
             print("Error: User already exists")
         else:
             db.Insert(self)

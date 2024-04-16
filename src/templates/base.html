@@ -20,7 +20,17 @@
               <li><a href="/home">{{ small_header.sheader1 }}</a></li>
               <li><a href="/about_us">{{ small_header.sheader2 }}</a></li>
               <li><a href="#">{{ small_header.sheader3 }}</a></li>
-              <li><a href="/login"><i class="{{small_header.sheader4}}" style="font-size: 16px;"></i></a></li>
+             {% if session.logged_in %}
+             <li>{{ session['username'] }}</li>
+             <li><form id="logout-form" action="/logout" method="post">
+              <button type="submit" class="logout-button">
+                <i class="fas fa-arrow-right"></i>
+              </button></li>
+          </form>
+          {% else %}
+           <li><a href="/login"><i class="{{small_header.sheader4}}" style="font-size: 16px;"></i>
+
+            {% endif %}
           </ul>
       </div>
   </section>

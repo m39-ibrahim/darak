@@ -15,10 +15,8 @@ class DatabaseController():
         table.insert_one(element.__dict__)
 
     def Select(self, query):
-        # Directly assume query is a dictionary for simplicity
-        table = self.tables['User']  # Direct reference to the User collection
+        table = self.tables['User']
         cursor = list(table.find(query))
-        print(cursor)
         return cursor
 
 
