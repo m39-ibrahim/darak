@@ -65,18 +65,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.getElementById('search-icon').addEventListener('click', function() {
-    console.log("Search icon clicked")
+    // Get the search query from the input field
+    // const query = document.getElementById('search-input').value.trim();
+    // // Call the function to perform the search
+    // search(query);
     var searchBox = document.getElementById('search-box');
-    if (searchBox.classList.contains('visible')) {
-        // searchBox.classList.remove('visible');
-    } else {
+    if (!searchBox.classList.contains('visible')) {
         searchBox.classList.add('visible');
     }
 });
+let searchInProgress = false; // Flag to prevent multiple search requests
+
+document.getElementById('search-input').addEventListener('keypress', function(event) {
+    // Check if the Enter key is pressed
+    if (event.key === 'Enter') {
+        // Prevent the default action (form submission, etc.)
+        event.preventDefault();
+        // Stop the event propagation to prevent multiple executions
+        event.stopPropagation();
+        // Get the search query from the input field
+        const query = this.value.trim();
+        // Call the function to perform the search
+        search(query);
+    }
+});
+
+function search(query) {
+    // Check if a search is already in progress
+    if (searchInProgress) {
+        return; // If so, exit the function
+    }
+    
+    // Set the flag to indicate that a search is in progress
+    searchInProgress = true;
+
+    // Redirect to the search route in the browser with the search query as a parameter
+    window.location.href = `/search?query=${query}`;
+}
+
+
+
 
 document.getElementById('close-search').addEventListener('click', function() {
     document.getElementById('search-box').classList.remove('visible');
 });
+
 
 
 document.addEventListener('DOMContentLoaded', function() {

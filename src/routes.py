@@ -5,3 +5,4 @@ from category import *
 from section import *
 from favorites import *
 from cart import *
+from search import *
