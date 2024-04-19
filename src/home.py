@@ -26,24 +26,6 @@ def about_us():
     small_header_data, header_data, hero_data, sections_data = fetch_data()
     return render_template("about_us.html", header=header_data, hero=hero_data, small_header=small_header_data, sections=sections_data)
 
-# Electronic devices route
-@app.route('/electronic_devices.html')
-def electronic_devices():
-    small_header_data, header_data, hero_data, sections_data = fetch_data()
-    return render_template('electronic_devices.html', header=header_data, hero=hero_data, small_header=small_header_data, sections=sections_data)
-
-# Home appliances route
-@app.route('/home_appliances.html')
-def home_appliances():
-    small_header_data, header_data, hero_data, sections_data = fetch_data()
-    return render_template('home_appliances.html', header=header_data, hero=hero_data, small_header=small_header_data, sections=sections_data)
-
-# Fabrics route
-@app.route('/fabrics.html')
-def fabrics():
-    small_header_data, header_data, hero_data, sections_data = fetch_data()
-    return render_template('fabrics.html', header=header_data, hero=hero_data, small_header=small_header_data, sections=sections_data)
-
 
 # # Categories route
 # @app.route("/categories", methods=["GET", "POST"])

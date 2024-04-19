@@ -204,3 +204,40 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.send();
     }
 });
+
+// Add event listener to heart icon
+document.querySelectorAll('.add-to-favorites').forEach(function(heart) {
+    heart.addEventListener('click', function(event) {
+        event.preventDefault();
+        // Get the item ID from the data attribute
+        var itemId = this.getAttribute('data-item-id');
+        // Get the heart icon element
+        var heartIcon = this.querySelector('i.fa-heart');
+        
+        // Send AJAX request to add item to favorites
+        addToFavorites(itemId, heartIcon);
+    });
+});
+
+// Function to send AJAX request to add item to favorites
+function addToFavorites(itemId, heartIcon) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/add_to_favorites', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Handle success response
+                console.log('Item added to favorites successfully');
+                // Add the 'favorited' class to the heart icon
+                heartIcon.classList.add('favorited');
+            } else {
+                // Handle error response
+                console.error('Error adding item to favorites:', xhr.responseText);
+            }
+        }
+    };
+    var formData = 'item_id=' + encodeURIComponent(itemId);
+    xhr.send(formData);
+}
+

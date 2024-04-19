@@ -36,6 +36,7 @@ def login():
             user_doc[0].pop('_id', None) 
             hashed_password = user_doc[0]['password_hash']
             username = user_doc[0]['name']
+            email = user_doc[0]['email']
             print("Hashed password from database:", hashed_password)
             if hashed_password==password:
                 print("Password correct.")
@@ -44,6 +45,7 @@ def login():
                 login_user(user, remember=True)
                 session['logged_in'] = True  # Mark user as logged in
                 session['username'] = username
+                session['email'] = email
                 print("User logged in successfully.")
                 return redirect(url_for('home'))  # Redirect to the home page
             else:
@@ -81,4 +83,5 @@ def signup():
 def logout():
     logout_user()
     session.pop('logged_in', None)  # Remove user session
+    session.pop('email', None)
     return redirect(url_for('home'))  # Adjust if your homepage's route is different
