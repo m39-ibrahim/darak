@@ -81,7 +81,7 @@ def toggle_favorite():
     if request.method == "POST":
         # Extract the item ID from the request data
         item_id = request.form.get("item_id")
-        print("Item ID:", item_id)
+        # print("Item ID:", item_id)
 
         # Retrieve user email from session
         user_email = session.get('email')

@@ -31,7 +31,7 @@ def favorites():
         
         # Convert item IDs from strings to ObjectId
         item_object_ids = [ObjectId(item_id) for item_id in item_ids]
-        print(f"Item ObjectIds: {item_object_ids}")
+        # print(f"Item ObjectIds: {item_object_ids}")
 
         # Retrieve the actual items from the database using the ObjectIds
         for item_id in item_object_ids:
@@ -50,7 +50,7 @@ def favorites():
                 }
                 # Append item data to the list
                 items_data.append(item_data)
-                print(f"Item with ID {item_id} found.")
+                # print(f"Item with ID {item_id} found.")
             else:
                 print(f"Item with ID {item_id} not found.")
 
@@ -111,7 +111,7 @@ def toggle_favorite():
     if request.method == "POST":
         # Extract the item ID from the request data
         item_id = request.form.get("item_id")
-        print("Item ID:", item_id)
+        # print("Item ID:", item_id)
 
         # Retrieve user email from session
         user_email = session.get('email')

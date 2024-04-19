@@ -30,29 +30,29 @@ def login():
         # Adjust the Select method to directly use email for the query
         user_doc = db_controller.Select({"email": email})  # Ensure Select can handle a dict query
  # Remove the _id field from the document
-        print("User document:", user_doc)
-        print("Provided password:", password)
+        # print("User document:", user_doc)
+        # print("Provided password:", password)
         if user_doc:
             user_doc[0].pop('_id', None) 
             hashed_password = user_doc[0]['password_hash']
             username = user_doc[0]['name']
             email = user_doc[0]['email']
-            print("Hashed password from database:", hashed_password)
+            # print("Hashed password from database:", hashed_password)
             if hashed_password==password:
-                print("Password correct.")
+                # print("Password correct.")
                 # Assuming user_doc[0] contains the user information
                 user = User(*user_doc[0])  # Create a User object with the document
                 login_user(user, remember=True)
                 session['logged_in'] = True  # Mark user as logged in
                 session['username'] = username
                 session['email'] = email
-                print("User logged in successfully.")
+                # print("User logged in successfully.")
                 return redirect(url_for('home'))  # Redirect to the home page
             else:
-                print("Incorrect password.")
+                # print("Incorrect password.")
                 flash('Invalid email or password.')
         else:
-            print("User not found.")
+            # print("User not found.")
             flash('Invalid email or password.')
     return render_template('login.html')
 

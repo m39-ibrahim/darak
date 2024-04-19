@@ -11,9 +11,9 @@ db_controller = DatabaseController()
 def display_section(section_name):
     section_name = section_name.replace("_", " ")
     section_name = section_name[0].upper() + section_name[1:]
-    print("Section name:", section_name)
+    # print("Section name:", section_name)
     items = db_controller.db.item.find({"section": section_name})
-    print(items)
+    # print(items)
 
     # Prepare a list to store item data
     items_data = []
@@ -67,7 +67,7 @@ def toggle_favorite():
     if request.method == "POST":
         # Extract the item ID from the request data
         item_id = request.form.get("item_id")
-        print("Item ID:", item_id)
+        # print("Item ID:", item_id)
 
         # Retrieve user email from session
         user_email = session.get('email')
