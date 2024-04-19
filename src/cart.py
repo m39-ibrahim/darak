@@ -32,6 +32,7 @@ def cart():
         # Convert item IDs from strings to ObjectId
         item_object_ids = [ObjectId(item_id) for item_id in item_ids]
 
+        total_price = 0  # Initialize total price
         # Retrieve the actual items from the database using the ObjectIds
         for item_id in item_object_ids:
             item = db_controller.db.item.find_one({'_id': item_id})
@@ -49,6 +50,7 @@ def cart():
                 }
                 # Append item data to the list
                 items_data.append(item_data)
+                total_price += item_data['price']
                 # print(f"Item with ID {item_id} found.")
             else:
                 print(f"Item with ID {item_id} not found.")
@@ -61,7 +63,7 @@ def cart():
                 fav.append(str(item))
 
     # Pass the items and other data to the template
-    return render_template('cart.html',favorited=fav, items=items_data, header=header_data, hero_data=hero_data, small_header=small_header_data, sections=sections_data)
+    return render_template('cart.html',total_price=total_price,favorited=fav, items=items_data, header=header_data, hero_data=hero_data, small_header=small_header_data, sections=sections_data)
 
 @cart_bp.route('/add_to_cart', methods=['POST'])
 # @login_required

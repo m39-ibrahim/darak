@@ -445,10 +445,7 @@ button:hover {
 }
 
 
-
-
-/* 
-/* feature section
+/* feature section*/
 #feature{
   display: flex;
   justify-content: space-between;
@@ -863,4 +860,19 @@ footer a:hover{
 }
 .form-content.active {
   opacity: 1; /* Set opacity to 1 when form is active */
+}
+
+.cart-summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align items to the right */
+  margin-top: 20px; /* Adjust the margin to add space between the cart summary and other content */
+  padding: 10px; /* Add padding to ensure text is visible */
+}
+
+.total-price {
+  margin-left: 10px; /* Adjust the margin to add space between the total price and the checkout button */
+  font-weight: bold;
+  font-style: italic;
+  padding-right: 10px;
 }

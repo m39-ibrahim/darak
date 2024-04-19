@@ -12,7 +12,7 @@
                     <!-- Displaying the item name and description -->
                     <h5>{{ item.name }}</h5>
                     <p>{{ item.description }}</p>
-                    <h4>${{ item.price }}</h4>
+                    <h4>£{{ item.price }}</h4>
                 </div>
                 <a href="#" class="toggle-favorite" data-item-id="{{ item.id }}" onclick="toggleFavorite(this)"><i class="fas fa-regular fa-heart" style='{% if item.id in favorited %}color: #f60d4b;{% endif %}'></i></a>
                 <a href="#" class="toggle-cart" data-item-id="{{ item.id }}" onclick="toggleCart(this)"><i class="fas fa-shopping-cart cart"  style='{% if item.id in carted %}color: #088178;{% endif %}'></i></a>
