@@ -57,107 +57,27 @@
     </div>
   </section> 
 
-    <section id="product1" class="section-p1">
-      <h2>Featured Products</h2>
-      <p> Check out our products</p>
-      <div class= "pro-container">
+  <section id="product1" class="section-p1">
+    <h2>Featured Products</h2>
+    <p>Check out our products</p>
+    <div class="pro-container">
+        {% for item in random_items %}
         <div class="pro">
-          <img
-            src="/static/products/product1.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>SHARP</span>      
-          <h5>8K Smart LED TV 60 Inch Android</h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+            <!-- Assuming the image is stored in the database, otherwise adjust accordingly -->
+            <img src="{{ item.images }}" alt="{{ item.name }}" />
+            <div class="des">
+                <!-- Displaying the item name and description -->
+                <h5>{{ item.name }}</h5>
+                <p>{{ item.description }}</p>
+                <h4>£{{ item.price }}</h4>
             </div>
-          <h4> $1000 </h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
+            <a href="#" class="toggle-favorite" data-item-id="{{ item.id }}" onclick="toggleFavorite(this)"><i class="fas fa-regular fa-heart" style='{% if item.id in favorited %}color: #f60d4b;{% endif %}'></i></a>
+            <a href="#" class="toggle-cart" data-item-id="{{ item.id }}" onclick="toggleCart(this)"><i class="fas fa-shopping-cart cart"  style='{% if item.id in carted %}color: #088178;{% endif %}'></i></a>
         </div>
-        <div class="pro">
-          <img
-            src="/static/products/product2.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>HOOVER</span>      
-          <h5>Microwave Solo 25 Liter</h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          <h4>$150</h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
-        </div>
-        <div class="pro">
-          <img
-            src="/static/products/product3.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>Sony</span>      
-          <h5>Portable Wireless Bluetooth Speaker</h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          <h4> $35</h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
-        </div>
-        <div class="pro">
-          <img
-            src="/static/products/product5.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>TORNADO</span>      
-          <h5>TORNADO Washing Machine 7 Kg - 5 Kg Dryer Black </h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          <h4> $3500</h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
-        </div>
-        <div class="pro">
-          <img
-            src="/static/products/product4.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>TORNADO</span>      
-          <h5>TORNADO Automatic Turkish Coffee Maker</h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          <h4> $50 </h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
-        </div>
-      </div>
-    </section>
+        {% endfor %}
+    </div>
+</section>
+
     
     <section id ="banner" class ="section-m1">
       <h4>Offers And Discounts</h4>
@@ -167,86 +87,28 @@
 
     <section id="product1" class="section-p1">
       <h2>New Arrivals</h2>
-      <p> Check out latest products</p>
-      <div class= "pro-container">
-        <div class="pro">
-          <img
-            src="/static/new_arrivals/NA1.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>SONY</span>      
-          <h5>PlayStation PS5™ - Standard Version ( Disk ) in White Colord</h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          <h4> $600 </h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
-        </div>
-        <div class="pro">
-          <img
-            src="/static/new_arrivals/NA2.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>TORNADO</span>      
-          <h5>MChopper 400 Watt 1 Liter Mince Meat Molokhia White</h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          <h4>$50</h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
-        </div>
-        <div class="pro">
-          <img
-            src="/static/new_arrivals/NA3.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>SEIKO</span>      
-          <h5>Men's Hand Watch PROSPEX Oily Rubber Strap, Green Dial</h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          <h4> $500</h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
-        </div>
-        <div class="pro">
-          <img
-            src="/static/new_arrivals/NA4.jpg"
-            alt=""
-          />
-        <div class="des">
-          <span>TORNADO</span>      
-          <h5> Manual Espresso Machine 15bar 1.2L Black x Stainless</h5>
-            <div class ="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          <h4> $149</h4>
-         </div>
-         <a href ='#'> <i class="fas fa-shopping-cart cart"></i></a>
-        </div>
+      <p>Check out latest products</p>
+      <div class="pro-container">
+          {% for item in last_4_items %}
+          <div class="pro">
+              <img src="{{ item.images }}" alt="{{ item.name }}" />
+              <div class="des">
+                  <h5>{{ item.name }}</h5>
+                  <p>{{ item.description }}</p>
+                  <h4>${{ item.price }}</h4>
+              </div>
+              <a href="#" class="toggle-favorite" data-item-id="{{ item.id }}" onclick="toggleFavorite(this)">
+                  <i class="fas fa-regular fa-heart" style="{% if item.id in favorited %}color: #f60d4b;{% endif %}"></i>
+              </a>
+              <a href="#" class="toggle-cart" data-item-id="{{ item.id }}" onclick="toggleCart(this)">
+                  <i class="fas fa-shopping-cart cart" style="{% if item.id in carted %}color: #088178;{% endif %}"></i>
+              </a>
+          </div>
+          {% endfor %}
       </div>
-    </section>
+  </section>
+  
+    
 
     {% include 'footer.html' %}
   <script src="/static/script.js"></script>
