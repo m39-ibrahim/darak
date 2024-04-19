@@ -35,14 +35,25 @@ def display_section(section_name):
     # pprint(items_data)
     categories_data = db_controller.db.categories.find({})
     small_header_data, header_data,hero_data, sections_data = fetch_data()
+    
     fav = []
     if "email" in session:
         user_email = session.get('email')
         user_favorite = db_controller.db.favorites.find_one({'user_email': user_email})
-        for item in user_favorite.get('items', []):
-            fav.append(str(item))
+        if user_favorite:
+            for item in user_favorite.get('items', []):
+                fav.append(str(item))
+
+    cart = []
+    if "email" in session:
+        user_email = session.get('email')
+        user_cart = db_controller.db.cart.find_one({'user_email': user_email})
+        if user_cart:
+            for item in user_cart.get('items', []):
+                cart.append(str(item))
+
     # Render the template with the section title and items data
-    return render_template("sections.html", section_title=section_name, items=items_data, favorited=fav,categories=categories_data, header=header_data,  hero_data=db_controller.db.hero.find_one(), small_header=small_header_data, sections=sections_data)
+    return render_template("sections.html", carted=cart,section_title=section_name, items=items_data, favorited=fav,categories=categories_data, header=header_data,  hero_data=db_controller.db.hero.find_one(), small_header=small_header_data, sections=sections_data)
 
 # @section_bp.route("/toggle_favorite", methods=["POST"])
 # def toggle_favorite():

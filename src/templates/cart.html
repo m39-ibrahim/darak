@@ -1,9 +1,10 @@
 {% include 'base.html' %}
 {% block stuff %}
     <section id="product1" class="section-p1">
-        <h2>{{ category_title|title }}</h2>
-        <p>Check out our {{ category_title |title}}</p>
-        <div class= "pro-container">
+        <h2>Cart</h2>
+        <p>Your shopping cart</p>
+        <!-- Other HTML content -->
+        <div class="pro-container">
             {% for item in items %}
             <div class="pro">
                 <!-- Assuming the image is stored in the database, otherwise adjust accordingly -->
@@ -15,11 +16,11 @@
                     <h4>${{ item.price }}</h4>
                 </div>
                 <a href="#" class="toggle-favorite" data-item-id="{{ item.id }}" onclick="toggleFavorite(this)"><i class="fas fa-regular fa-heart" style='{% if item.id in favorited %}color: #f60d4b;{% endif %}'></i></a>
-                <a href="#" class="toggle-cart" data-item-id="{{ item.id }}" onclick="toggleCart(this)"><i class="fas fa-shopping-cart cart"  style='{% if item.id in carted %}color: #088178;{% endif %}'></i></a>
+                <a href="#" class="toggle-cart" data-item-id="{{ item.id }}" onclick="toggleCart(this)"><i class="fas fa-shopping-cart cart"  style='color: #088178;'></i></a>
             </div>
             {% endfor %}
         </div>
     </section>
-    </script>
+
     {% include 'footer.html' %}
 {% endblock %}

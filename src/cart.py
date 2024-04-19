@@ -5,12 +5,12 @@ from main import app
 from home import fetch_data
 from bson import ObjectId
 
-
-favorites_bp = Blueprint('favorites', __name__)
+cart_bp = Blueprint('cart', __name__)
 db_controller = DatabaseController()
 
-@app.route('/favorites', methods=['GET'])
-def favorites():
+# @app.route('/cart', methods=['GET'])
+@cart_bp.route('/cart', methods=['GET'])
+def cart():
     # Retrieve user email from session
     user_email = session.get('email')
     if not user_email:
@@ -23,15 +23,14 @@ def favorites():
     # Initialize an empty list to store item data
     items_data = []
 
-    # Retrieve user favorite items
-    user_favorite = db_controller.db.favorites.find_one({'user_email': user_email})
-    if user_favorite:
-        # Retrieve item IDs from user's favorites
-        item_ids = user_favorite.get('items', [])
+    # Retrieve user cart items
+    user_cart = db_controller.db.cart.find_one({'user_email': user_email})
+    if user_cart:
+        # Retrieve item IDs from user's cart
+        item_ids = user_cart.get('items', [])
         
         # Convert item IDs from strings to ObjectId
         item_object_ids = [ObjectId(item_id) for item_id in item_ids]
-        # print(f"Item ObjectIds: {item_object_ids}")
 
         # Retrieve the actual items from the database using the ObjectIds
         for item_id in item_object_ids:
@@ -53,104 +52,47 @@ def favorites():
                 # print(f"Item with ID {item_id} found.")
             else:
                 print(f"Item with ID {item_id} not found.")
-    cart = []
+    fav = []
     if "email" in session:
         user_email = session.get('email')
-        user_cart = db_controller.db.cart.find_one({'user_email': user_email})
-        if user_cart:
-            for item in user_cart.get('items', []):
-                cart.append(str(item))
+        user_favorite = db_controller.db.favorites.find_one({'user_email': user_email})
+        if user_favorite:
+            for item in user_favorite.get('items', []):
+                fav.append(str(item))
+
     # Pass the items and other data to the template
-    return render_template('favorites.html', items=items_data, carted=cart, header=header_data, hero_data=hero_data, small_header=small_header_data, sections=sections_data)
+    return render_template('cart.html',favorited=fav, items=items_data, header=header_data, hero_data=hero_data, small_header=small_header_data, sections=sections_data)
 
-
-@favorites_bp.route('/add_to_favorites', methods=['POST'])
+@cart_bp.route('/add_to_cart', methods=['POST'])
 # @login_required
-def add_to_favorites():
-    # Debug: Print a message to indicate the beginning of the function
-    # print("Add to favorites route called.")
-
+def add_to_cart():
     # Retrieve user email from session
     user_email = session.get('email')
     if not user_email:
-        # Debug: Print an error message if user email is not found in session
-        # print("Error: User email not found in session.")
         return jsonify({'error': 'User email not found in session'}), 401
 
     # Retrieve item_id from the request form
     item_id = request.form.get('item_id')
 
-    # Check if user already exists in favorites collection
-    user_favorite = db_controller.db.favorites.find_one({'user_email': user_email})
+    # Check if user already has a cart
+    user_cart = db_controller.db.cart.find_one({'user_email': user_email})
 
-    if user_favorite:
-        # Debug: Print a message to indicate that the user already exists in favorites collection
-        # print("User already exists in favorites collection. Updating favorites...")
-
-        # User already exists, update favorites
-        db_controller.db.favorites.update_one(
+    if user_cart:
+        # User already has a cart, update it
+        db_controller.db.cart.update_one(
             {'user_email': user_email},
             {'$addToSet': {'items': item_id}}
         )
     else:
-        # Debug: Print a message to indicate that the user does not exist in favorites collection
-        # print("User does not exist in favorites collection. Creating new document...")
-
-        # User does not exist, create new document
-        db_controller.db.favorites.insert_one({
+        # User does not have a cart, create a new one
+        db_controller.db.cart.insert_one({
             'user_email': user_email,
             'items': [item_id]
         })
 
-    # Debug: Print a success message after adding the item to favorites
-    # print("Item added to favorites successfully.")
+    return jsonify({'message': 'Item added to cart successfully'})
 
-    return jsonify({'message': 'Item added to favorites successfully'})
-
-@favorites_bp.route('/favorites')
-def favorites_page():
-    # Render the favorites.html template
-    return render_template('favorites.html')
-
-@favorites_bp.route('/toggle_favorite', methods=["POST"])
-def toggle_favorite():
-    if request.method == "POST":
-        # Extract the item ID from the request data
-        item_id = request.form.get("item_id")
-        # print("Item ID:", item_id)
-
-        # Retrieve user email from session
-        user_email = session.get('email')
-
-        # Check if the user is logged in
-        if not user_email:
-            return jsonify({"error": "User not logged in"}), 401
-
-        # Check if the item is already in favorites for the user
-        user_favorite = db_controller.db.favorites.find_one({'user_email': user_email})
-
-        if user_favorite and item_id in user_favorite.get('items', []):
-            # Item is already in favorites, remove it
-            db_controller.db.favorites.update_one(
-                {'user_email': user_email},
-                {'$pull': {'items': item_id}}
-            )
-
-            return jsonify({"message": "Item removed from favorites successfully"}), 200
-        else:
-            # Item is not in favorites, add it
-            db_controller.db.favorites.update_one(
-                {'user_email': user_email},
-                {'$addToSet': {'items': item_id}},
-                upsert=True
-            )
-
-            return jsonify({"message": "Item added to favorites successfully"}), 200
-    else:
-        return jsonify({"error": "Method not allowed"}), 405
-
-
-@favorites_bp.route('/toggle_cart', methods=["POST"])
+@cart_bp.route('/toggle_cart', methods=["POST"])
 def toggle_cart():
     if request.method == "POST":
         # Extract the item ID from the request data

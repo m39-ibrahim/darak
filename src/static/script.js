@@ -241,3 +241,59 @@ function addToFavorites(itemId, heartIcon) {
     xhr.send(formData);
 }
 
+function toggleFavorite(element) {
+    event.preventDefault();
+    var itemId = element.getAttribute('data-item-id');
+    
+    // Send AJAX request to toggle item in favorites
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/toggle_favorite', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Handle success response
+                var response = JSON.parse(xhr.responseText);
+                console.log(response.message);
+                // Toggle the color of the heart icon
+                var heartIcon = element.querySelector('i.fa-heart');
+                heartIcon.style.color = heartIcon.style.color === 'rgb(246, 13, 75)' ? '' : '#f60d4b';
+            } else {
+                // Handle error response
+                console.error('Error toggling item in favorites:', xhr.responseText);
+            }
+        }
+    };
+
+    // Toggle the item in favorites based on its current state
+    xhr.send('item_id=' + encodeURIComponent(itemId));
+}
+
+function toggleCart(element) {
+event.preventDefault();
+var itemId = element.getAttribute('data-item-id');
+
+// Send AJAX request to toggle item in cart
+var xhr = new XMLHttpRequest();
+xhr.open('POST', '/toggle_cart', true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+            // Handle success response
+            var response = JSON.parse(xhr.responseText);
+            console.log(response.message);
+            // Toggle the color of the cart icon
+            var cartIcon = element.querySelector('i.fa-shopping-cart');
+            cartIcon.style.color = response.message === 'Item added to cart successfully' ? '#088178' : '';
+
+        } else {
+            // Handle error response
+            console.error('Error toggling item in cart:', xhr.responseText);
+        }
+    }
+};
+
+// Toggle the item in cart based on its current state
+xhr.send('item_id=' + encodeURIComponent(itemId));
+}
